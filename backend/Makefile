@@ -10,6 +10,6 @@ install:
 
 setup: venv install	
 
-
 run:
-	python -m app.main
+	. $(VENV_NAME)/bin/activate && python -m app.main
+
