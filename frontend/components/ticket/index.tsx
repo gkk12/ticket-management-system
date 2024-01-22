@@ -11,6 +11,7 @@ import { Ticket as TicketType } from "../../types/Ticket"
 import ContextMessages from '../contextMessages/index';
 import Message from '../message';
 import { TicketStatus } from '../../types/TicketStatus';
+import MessageComponent from '../message';
 
 interface TicketProps {
   ticket: TicketType;
@@ -38,11 +39,13 @@ const Ticket: React.FC<TicketProps> = ({
   setHoveredMessage
 }) => {
 
+    // Styles for the ticket layout
     const ticketStyle = { display: 'flex', marginBottom: '10px' };
     const rowHeaderStyle = { flex: 1, fontWeight: 'bold' };
     const rowBodyStyle = { flex: 2 };
     const iconStyle = { marginRight: '8px' };
 
+    // Check if the message associated with the ticket is expanded
     const isMessageExpanded = () : boolean => {
         return expandedTicketMessages.some((message: MessageType) => message.id === ticket.msg_id);
     }
@@ -92,7 +95,7 @@ const Ticket: React.FC<TicketProps> = ({
               <div style={ticketStyle}>
                 <div style={rowHeaderStyle}></div>
                 <div style={rowBodyStyle}>{isMessageExpanded() ?
-                  <Message messages={expandedTicketMessages} ticket={ticket} /> : ""}
+                  <MessageComponent messages={expandedTicketMessages} ticket={ticket} /> : ""}
                 </div>
               </div>
               <div style={ticketStyle}>

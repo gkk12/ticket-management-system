@@ -28,7 +28,7 @@ const Tickets: NextPage = () => {
         setTickets(data);
         setLoading(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => setError(err));
   }, []);
 
   React.useEffect(() => {
@@ -49,6 +49,7 @@ const Tickets: NextPage = () => {
     };
   }, []);
 
+  // Function to handle API calls with error handling
   const invokeAPI = async (url: string, options?: RequestInit) => {
     try {
       const response = await fetch(url, options);
@@ -61,8 +62,8 @@ const Tickets: NextPage = () => {
     }
   };
 
+  // deletes tickets and returns the ticket deleted
   const deleteTicket = async (ticketId: string) => {
-    // deletes tickets and returns the ticket deleted
     try {
       const data = await invokeAPI(`http://localhost:5001/ticket/${ticketId}`, {
         method: 'DELETE',
@@ -75,7 +76,7 @@ const Tickets: NextPage = () => {
     }
   };
 
-
+  // Function to expand a message
   const expandMessage = async (context_message: string) => {
     // expand the message to display the message details
     try {
@@ -94,6 +95,7 @@ const Tickets: NextPage = () => {
     }
   };
 
+  // Function to expand/collapse context messages for a ticket
   const displayContextMessages = (ticket: TicketType) : void => {
     // expand the ticket to display all the context messages
     const ticketId = ticket.id;
@@ -104,6 +106,7 @@ const Tickets: NextPage = () => {
     }
   };
 
+  // Function to show/hide details of a ticket message
   const showTicketMessage = async (context_message: string) => {
     try {
       const data = await invokeAPI(`http://localhost:5001/message/${context_message}`);

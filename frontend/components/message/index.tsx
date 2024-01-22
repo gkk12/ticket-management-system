@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip, Link } from '@mui/material';
-import { Message, Message as MessageType } from '../../types/Message';
+import { Message as MessageType } from '../../types/Message';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { Ticket } from '../../types/Ticket';
 
@@ -12,10 +12,13 @@ interface MessageProps {
 
 const MessageComponent: React.FC<MessageProps> = ({ messages, ticket, contextMessage }) => {
 
+  // Determine the target message ID based on whether a context message is provided
   const targetMessageId = contextMessage ? contextMessage : ticket.msg_id;
 
+  // Style for each message row
   const messageRowStyle = { paddingBottom: '10px', marginBottom: '10px' };
 
+  // Find the target message based on the target message ID
   const findMessage = () : MessageType => {
     return messages.find(message => message.id === targetMessageId);
   }

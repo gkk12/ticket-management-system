@@ -8,6 +8,7 @@ import VisibilityOnIcon from '@mui/icons-material/Visibility';
 import { Message as MessageType } from '../../types/Message';
 import { Ticket as TicketType } from "../../types/Ticket"
 import Message from '../message';
+import MessageComponent from '../message';
 
 interface ContextMessagesProps {
   ticket: TicketType;
@@ -31,14 +32,15 @@ const ContextMessages: React.FC<ContextMessagesProps> = ({
 
     const iconStyle = { marginRight: '8px' };
 
+    // Check if the ticket is expanded
     const isTicketExpanded = (): boolean => {
         return expandedTickets.includes(ticket.id);
     }
 
+    // Check if a context message is expanded
     const isContextMessageExpanded = (context_message) : boolean => {
         return expandedMessages.some((message: MessageType) => message.id === context_message);
     }
-    
 
   return (
     <div>
@@ -87,7 +89,7 @@ const ContextMessages: React.FC<ContextMessagesProps> = ({
                   {context_message}
                 </div>
                 {isContextMessageExpanded(context_message) && (
-                  <Message messages={expandedMessages} ticket={ticket} contextMessage={context_message} />
+                  <MessageComponent messages={expandedMessages} ticket={ticket} contextMessage={context_message} />
                 )}
               </li>
             ))}
