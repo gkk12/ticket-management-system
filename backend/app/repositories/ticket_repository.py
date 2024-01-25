@@ -21,6 +21,7 @@ class TicketRepository:
     def get_message_by_id(self, messageId):
         all_messages = self.data["messages"]
         filtered_messages = list(filter(lambda message: message['id'] == messageId, all_messages))
+
         if filtered_messages:
             return filtered_messages[0]
         else:
